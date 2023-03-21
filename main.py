@@ -9,7 +9,7 @@ YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
-LONG_BREAK_MIN = 20
+LONG_BREAK_MIN = 30
 CHECKMARK = "✔"
 reps = 0
 timer = None
@@ -18,8 +18,9 @@ timer = None
 
 
 def reset_timer():
+    start_button.config(state="normal")
     canvas.after_cancel(timer)
-    canvas.itemconfig(timer_text, text = "00:00")
+    canvas.itemconfig(timer_text, text="00:00")
     top_label.config(text="Timer", fg=GREEN)
     checkmark_label.config(text="")
 
@@ -55,6 +56,7 @@ def count_down(count):
         seconds = f"0{seconds}"
 
     canvas.itemconfig(timer_text, text=f"{minutes}:{seconds}")
+    start_button.config(state="disabled")
 
     if count > 0:
         global timer
